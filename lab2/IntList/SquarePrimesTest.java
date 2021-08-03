@@ -35,4 +35,12 @@ public class SquarePrimesTest {
         assertEquals("121 -> 14 -> 15 -> 16 -> 121 -> 18", lst.toString()); // appears to only square the prime number once, even if it's in the list more than once
         assertTrue(changed);
     }
+
+    @Test
+    public void testSquarePrimes4() {
+        IntList lst = IntList.of(11, 11, 11, 11, 11, 11);
+        boolean changed = IntListExercises.squarePrimes(lst);
+        assertEquals("121 -> 121 -> 121 -> 121 -> 121 -> 121", lst.toString()); // appears to only square the prime number once, even if it's in the list more than once
+        assertTrue(changed);
+    }
 }
