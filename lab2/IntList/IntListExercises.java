@@ -72,19 +72,19 @@ public class IntListExercises {
      */
     public static boolean squarePrimes(IntList lst) {
         // Base Case: we have reached the end of the list
-        if (lst == null) { // this doesn't appear to be working as anticipated
-            return false;
+        if (lst == null) {
+            return true;
         }
 
         boolean currElemIsPrime = Primes.isPrime(lst.first);
 
         if (currElemIsPrime) {
-            lst.first *= lst.first; // this may need to check actual node value as well
-            //lst = lst.rest; // attempting to move the pointer
+            lst.first *= lst.first;
         }
 
-        return currElemIsPrime && squarePrimes(lst.rest);
-        // both of these values resolve to true after you find one non-prime number
-        // seems to check if the wrong value is prime
+        lst = lst.rest;
+
+        return squarePrimes(lst);
+
     }
 }
