@@ -10,9 +10,12 @@ public class IntListExercises {
      */
     public static void addConstant(IntList lst, int c) {
         IntList head = lst;
-        while (head.rest != null) {
+        while (head != null) { // need to check the value of head itself, not where it's pointing too (head.rest)
             head.first += c;
-            head = head.rest;
+            head = head.rest; // last item points to null so it never gets updated
+            // have to make sure that current value always get updated
+            // regular of where it points to next
+
         }
     }
 
@@ -26,7 +29,9 @@ public class IntListExercises {
     public static void setToZeroIfMaxFEL(IntList L) {
         IntList p = L;
         while (p != null) {
-            if (firstDigitEqualsLastDigit(max(p))) {
+            int currentMax = max(p);
+            boolean firstEqualsLast = firstDigitEqualsLastDigit(currentMax); // this is not working as expected
+            if (firstEqualsLast) {
                 p.first = 0;
             }
             p = p.rest;
@@ -51,7 +56,7 @@ public class IntListExercises {
      */
     public static boolean firstDigitEqualsLastDigit(int x) {
         int lastDigit = x % 10;
-        while (x > 10) {
+        while (x >= 10) { // needed to be less than or equal to
             x = x / 10;
         }
         int firstDigit = x % 10;
@@ -67,16 +72,19 @@ public class IntListExercises {
      */
     public static boolean squarePrimes(IntList lst) {
         // Base Case: we have reached the end of the list
-        if (lst == null) {
+        if (lst == null) { // this doesn't appear to be working as anticipated
             return false;
         }
 
         boolean currElemIsPrime = Primes.isPrime(lst.first);
 
         if (currElemIsPrime) {
-            lst.first *= lst.first;
+            lst.first *= lst.first; // this may need to check actual node value as well
+            //lst = lst.rest; // attempting to move the pointer
         }
 
-        return currElemIsPrime || squarePrimes(lst.rest);
+        return currElemIsPrime && squarePrimes(lst.rest);
+        // both of these values resolve to true after you find one non-prime number
+        // seems to check if the wrong value is prime
     }
 }

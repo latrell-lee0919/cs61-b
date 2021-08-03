@@ -1,7 +1,9 @@
 package IntList;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class SquarePrimesTest {
 
@@ -15,6 +17,22 @@ public class SquarePrimesTest {
         IntList lst = IntList.of(14, 15, 16, 17, 18);
         boolean changed = IntListExercises.squarePrimes(lst);
         assertEquals("14 -> 15 -> 16 -> 289 -> 18", lst.toString());
+        assertTrue(changed);
+    }
+
+    @Test
+    public void testSquarePrimes2() {
+        IntList lst = IntList.of(14, 15, 16, 3, 18);
+        boolean changed = IntListExercises.squarePrimes(lst);
+        assertEquals("14 -> 15 -> 16 -> 9 -> 18", lst.toString());
+        assertTrue(changed);
+    }
+
+    @Test
+    public void testSquarePrimes3() {
+        IntList lst = IntList.of(11, 14, 15, 16, 11, 18);
+        boolean changed = IntListExercises.squarePrimes(lst);
+        assertEquals("121 -> 14 -> 15 -> 16 -> 121 -> 18", lst.toString()); // appears to only square the prime number once, even if it's in the list more than once
         assertTrue(changed);
     }
 }
